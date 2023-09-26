@@ -1,8 +1,0 @@
-[2023-06-21 16:15:45] production.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
-{
-    "message": "Solutel has created hotel Riyadh Diplomatic Quarter - Marriott Executive Apartments",
-    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/booking.solutel.sa\/images\/avatar.png\" alt=\"Solutel\">",
-    "link": "http:\/\/booking.solutel.sa\/admin\/module\/hotel\/edit\/13",
-    "idNotification": "f9e5e72a-b46a-4c61-9be0-df6a5db0d783",
-    "socket": null
-}  
