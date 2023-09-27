@@ -35,6 +35,16 @@
                     'string',
                     'max:255'
                 ],
+                'national_id'      => [
+                    'required',
+                    'integer',
+                    'digits:10',
+                ],
+                'passport'      => [
+                    'required',
+                    'string',
+                    'max:255',
+                ],
                 'email'      => [
                     'required',
                     'string',
@@ -51,7 +61,7 @@
                         ->symbols()
                         ->uncompromised(),
                 ],
-                'phone'       => ['required','unique:users'],
+                'phone'       => ['required','integer','unique:users'],
                 'term'       => ['required'],
             ];
             $messages = [
@@ -84,6 +94,8 @@
                 $user = \App\User::create([
                     'first_name' => $request->input('first_name'),
                     'last_name'  => $request->input('last_name'),
+                    'national_id'  => $request->input('national_id'),
+                    'passport'  => $request->input('passport'),
                     'email'      => $request->input('email'),
                     'password'   => Hash::make($request->input('password')),
                     'status'    => $request->input('publish','publish'),

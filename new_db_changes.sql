@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `national_id` VARCHAR(255) NULL DEFAULT NULL AFTER `last_name`, ADD `passport` VARCHAR(255) NULL DEFAULT NULL AFTER `national_id`;
