@@ -162,15 +162,15 @@ class ModuleProvider extends ModuleServiceProvider
             ];
         }
 
-        if(is_enable_plan())
-        $res['my_plan'] = [
-            'url' => 'user/my-plan',
-            'title' => __("My Plans"),
-            'icon' => 'fa fa-list-alt',
-            'permission' => 'dashboard_vendor_access',
-            'enable' => true,
-            'position' => 95,
-        ];
+        // if(is_enable_plan())
+        // $res['my_plan'] = [
+        //     'url' => 'user/my-plan',
+        //     'title' => __("My Plans"),
+        //     'icon' => 'fa fa-list-alt',
+        //     'permission' => 'dashboard_vendor_access',
+        //     'enable' => true,
+        //     'position' => 95,
+        // ];
 
         return $res;
     }
