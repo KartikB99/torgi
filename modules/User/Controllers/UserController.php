@@ -84,6 +84,7 @@ class UserController extends FrontendController
             ],
             'is_vendor_access' => $this->hasPermission('dashboard_vendor_access')
         ];
+        //dd('User::frontend.profile');
         return view('User::frontend.profile', $data);
     }
 
