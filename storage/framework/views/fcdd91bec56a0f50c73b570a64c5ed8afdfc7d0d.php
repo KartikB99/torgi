@@ -163,7 +163,7 @@ if (!empty($menus))
     </div>
     <div class="user-profile-plan">
         <?php if( !Auth::user()->hasPermission("dashboard_vendor_access") and setting_item('vendor_enable')): ?>
-            <a href=" <?php echo e(route("user.upgrade_vendor")); ?>"><?php echo e(__("Become a vendor")); ?></a>
+            <!-- <a href=" <?php echo e(route("user.upgrade_vendor")); ?>"><?php echo e(__("Become a vendor")); ?></a> -->
         <?php endif; ?>
     </div>
     <div class="sidebar-menu">
