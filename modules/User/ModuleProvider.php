@@ -133,15 +133,15 @@ class ModuleProvider extends ModuleServiceProvider
         }
 
         $is_disable_verification_feature = setting_item('user_disable_verification_feature');
-        if(!empty($user->verification_fields) and empty($is_disable_verification_feature))
-        {
-            $res['verification']= [
-                'url'        => route('user.verification.index'),
-                'title'      => __("Verifications"),
-                'icon'       => 'fa fa-handshake-o',
-                'position'   => 85,
-            ];
-        }
+        // if(!empty($user->verification_fields) and empty($is_disable_verification_feature))
+        // {
+        //     $res['verification']= [
+        //         'url'        => route('user.verification.index'),
+        //         'title'      => __("Verifications"),
+        //         'icon'       => 'fa fa-handshake-o',
+        //         'position'   => 85,
+        //     ];
+        // }
 
         if(setting_item('inbox_enable')) {
             $count = auth()->user()->unseen_message_count;
