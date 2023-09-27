@@ -163,7 +163,7 @@ if (!empty($menus))
     </div>
     <div class="user-profile-plan">
         @if( !Auth::user()->hasPermission("dashboard_vendor_access") and setting_item('vendor_enable'))
-            <a href=" {{ route("user.upgrade_vendor") }}">{{ __("Become a vendor") }}</a>
+            <!-- <a href=" {{ route("user.upgrade_vendor") }}">{{ __("Become a vendor") }}</a> -->
         @endif
     </div>
     <div class="sidebar-menu">
