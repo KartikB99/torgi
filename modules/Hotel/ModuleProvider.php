@@ -105,23 +105,23 @@ class ModuleProvider extends ModuleServiceProvider
         if(Hotel::isEnable()){
             $res['hotel'] = [
                 'url'   => route('hotel.vendor.index'),
-                'title'      => __("Manage Hotel"),
+                'title'      => __("Manage Apartments"),
                 'icon'       => Hotel::getServiceIconFeatured(),
                 'position'   => 30,
                 'permission' => 'hotel_view',
                 'children' => [
                     [
                         'url'   => route('hotel.vendor.index'),
-                        'title'  => __("All Hotels"),
+                        'title'  => __("All Apartments"),
                     ],
                     [
                         'url'   => route('hotel.vendor.create'),
-                        'title'      => __("Add Hotel"),
+                        'title'      => __("Add Apartments"),
                         'permission' => 'hotel_create',
                     ],
                     [
                         'url'   => route('hotel.vendor.importview'),
-                        'title'      => __("Import Hotel"),
+                        'title'      => __("Import Apartments"),
                     ],
                     [
                         'url'   => route('hotel.vendor.recovery'),

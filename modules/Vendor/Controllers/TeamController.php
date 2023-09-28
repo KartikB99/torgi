@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Modules\FrontendController;
 use Modules\Vendor\Events\VendorTeamRequestCreatedEvent;
 use Modules\Vendor\Models\VendorTeam;
+use Illuminate\Support\Facades\Validator;
 
 class TeamController extends FrontendController
 {
@@ -16,27 +17,47 @@ class TeamController extends FrontendController
 
         $rows = auth()->user()->vendorTeams()->with('vendor')->paginate(30);
         $data = [
-            'page_title'=>__("Team members"),
+            'page_title'=>__("Managers"),
             'rows'=>$rows,
             'breadcrumbs'=>[
                 [
-                    'name'=>__("Team members")
+                    'name'=>__("Managers")
                 ]
             ]
         ];
         return view('Vendor::frontend.team.index',$data);
     }
     public function add(Request $request){
+        // print_r($request->all());exit;
         $request->validate([
+            'fname'=>'required',
+            'lname'=>'required',
             'email'=>[
                 'required',
                 'email',
-                Rule::exists('users','email')
+               // Rule::exists('users','email')
             ],
-            'permissions'=>'required|array'
+            'phone'=>'required|numeric',
+            'password' => 'required|min:8|confirmed',
+            //'permissions'=>'required|array'
+        ]);
+        
+// echo "validaated";exit;
+        $email = $request->input('email');
+        //[name] => sgs [phone] => 2323 [email] => country_admin@gmail.com [password] => 3232 [cpassword] => 2322 [permissions] => Array ( [0] => hotel )
+        
+        User::create([
+            'first_name'=>$request->input('fname'),
+            'last_name'=>$request->input('lname'),
+            'name'=>$request->input('fname')." ".$request->input('lname'),
+            'email'=>$request->input('email'),
+            'password'=>$request->input('password'),
+            'phone'=> $request->input('phone'),
+            'user_name'=> $request->input('fname'),
+            'role_id' => (int)4,
+            'status' => 'publish',
         ]);
 
-        $email = $request->input('email');
         $member = User::whereEmail($email)->first();
         if(!$member){
             return back()->with('danger',__("Member does not exists"));
@@ -56,13 +77,13 @@ class TeamController extends FrontendController
         $check = new VendorTeam();
         $check->vendor_id = $currentUser->id;
         $check->member_id = $member->id;
-        $check->status = setting_item('vendor_team_auto_approved') ? VendorTeam::STATUS_PUBLISH : VendorTeam::STATUS_PENDING;
+        $check->status = VendorTeam::STATUS_PUBLISH;
         $check->permissions = $request->input('permissions',[]);
         $check->save();
 
         VendorTeamRequestCreatedEvent::dispatch($check);
 
-        return back()->with('success',__("Request created"));
+        return back()->with('success',__("Manager created"));
 
     }
 

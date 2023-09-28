@@ -171,6 +171,16 @@ class ModuleProvider extends ModuleServiceProvider
         //     'enable' => true,
         //     'position' => 95,
         // ];
+        
+        $res['my_plan'] = [
+                'url' => 'vendor/team',
+                'title' => __("Managers"),
+                'icon' => 'fa fa-list-alt',
+                //'permission' => 'dashboard_vendor_access',
+                'enable' => true,
+                'position' => 95,
+        ];
+
 
         return $res;
     }

@@ -63,6 +63,7 @@
             'bio',
             'business_name',
             'status',
+            'role_id',
 //            'vendor_plan_id',
 //            'vendor_plan_enable',
 //            'vendor_plan_start_date',
@@ -90,7 +91,7 @@
         public function getMeta($key, $default = '')
         {
             //if(isset($this->cachedMeta[$key])) return $this->cachedMeta[$key];
-
+            
             $val = DB::table('user_meta')->where([
                 'user_id' => $this->id,
                 'name'    => $key
@@ -182,7 +183,7 @@
 
         public static function getUserBySocialId($provider, $socialId)
         {
-            return parent::query()->select('users.*')->join('user_meta as m', 'm.user_id', 'users.id')
+            return parent::query()->select('.*')->join('user_meta as m', 'm.user_id', '.id')
                 ->where('m.name', 'social_' . $provider . '_id')
                 ->where('m.val', $socialId)->first();
         }
