@@ -16,6 +16,19 @@
             </div>
         </div>
     </div>
+
+    <!-- new start -->
+    <div class="form-group">
+        <input type="text" class="form-control" name="national_id" autocomplete="off" placeholder="<?php echo e(__('National Idaaa')); ?>">
+        <i class="input-icon field-icon icofont-mail"></i>
+        <span class="invalid-feedback error error-national_id"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="passport" autocomplete="off" placeholder="<?php echo e(__('Passport')); ?>">
+        <i class="input-icon field-icon icofont-mail"></i>
+        <span class="invalid-feedback error error-passport"></span>
+    </div>
+    <!-- new start -->
     <div class="form-group">
         <input type="text" class="form-control" name="phone" autocomplete="off" placeholder="<?php echo e(__('Phone')); ?>">
         <i class="input-icon field-icon icofont-ui-touch-phone"></i>

@@ -592,6 +592,8 @@ jQuery(function ($) {
                 'password': form.find('input[name=password]').val(),
                 'first_name': form.find('input[name=first_name]').val(),
                 'last_name': form.find('input[name=last_name]').val(),
+                'national_id': form.find('input[name=national_id]').val(),
+                'passport': form.find('input[name=passport]').val(),
                 'phone': form.find('input[name=phone]').val(),
                 'term': form.find('input[name=term]').is(":checked") ? 1 : '',
                 'g-recaptcha-response': form.find('[name=g-recaptcha-response]').val(),

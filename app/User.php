@@ -47,6 +47,8 @@
             'name',
             'first_name',
             'last_name',
+            'national_id',
+            'passport',
             'email',
             'email_verified_at',
             'password',
