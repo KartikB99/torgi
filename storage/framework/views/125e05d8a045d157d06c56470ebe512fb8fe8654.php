@@ -19,7 +19,7 @@
 
     <!-- new start -->
     <div class="form-group">
-        <input type="text" class="form-control" name="national_id" autocomplete="off" placeholder="<?php echo e(__('National Idaaa')); ?>">
+        <input type="text" class="form-control" name="national_id" autocomplete="off" placeholder="<?php echo e(__('National Id')); ?>">
         <i class="input-icon field-icon icofont-mail"></i>
         <span class="invalid-feedback error error-national_id"></span>
     </div>
