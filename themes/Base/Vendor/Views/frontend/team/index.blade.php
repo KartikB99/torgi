@@ -3,31 +3,59 @@
 @section('content')
 
     <h2 class="title-bar">
-        {{__("Vendor Teams")}}
+        {{__("Managers")}}
     </h2>
     @include('admin.message')
 
-    <p>{{__('As an author, you can add other users to your team. People on your team will be able to manage your services.')}}</p>
+    <!-- <p>{{__('As an author, you can add other users to your team. People on your team will be able to manage your services.')}}</p> -->
+    <h5>{{__('Add Manager')}}</h5>
     <hr>
     <form method="post" action="{{route('vendor.team.add')}}">
         @csrf
         <div class="row">
             <div class="col-md-3">
-                <label class="font-weight-bold">{{__("Add someone to your team:")}}</label>
-                <input type="email" value="{{old('email')}}" name="email" required class="form-control" placeholder="{{__("Email address")}}" aria-label="{{__("Email address")}}" aria-describedby="button-addon2">
+                <label class="font-weight-bold">{{__("First Name")}}</label>
+                <input type="text" value="{{old('fname')}}" name="fname" required class="form-control" placeholder="{{__("First Name")}}" aria-label="{{__("First Name")}}" aria-describedby="button-addon2">
             </div>
             <div class="col-md-3">
+                <label class="font-weight-bold">{{__("Last Name")}}</label>
+                <input type="text" value="{{old('lname')}}" name="lname" required class="form-control" placeholder="{{__("Last Name")}}" aria-label="{{__("Last Name")}}" aria-describedby="button-addon2">
+            </div>
+            
+        </div><br>
+        <div class="row">
+        <div class="col-md-3">
+                <label class="font-weight-bold">{{__("Phone")}}</label>
+                <input type="text" value="{{old('phone')}}" name="phone" required class="form-control" placeholder="{{__("Phone")}}" aria-label="{{__("Phone")}}" aria-describedby="button-addon2">
+            </div>
+            <div class="col-md-3">
+                <label class="font-weight-bold">{{__("Email/Username")}}</label>
+                <input type="email" value="{{old('email')}}" name="email" required class="form-control" placeholder="{{__("Email address")}}" aria-label="{{__("Email address")}}" aria-describedby="button-addon2">
+            </div>
+            
+            
+        </div><br>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="font-weight-bold">{{__("Password")}}</label>
+                <input type="password" value="{{old('password')}}" name="password" required class="form-control" placeholder="{{__("password")}}" aria-label="{{__("Password")}}" aria-describedby="button-addon2">
+            </div>
+            <div class="col-md-3">
+                <label class="font-weight-bold">{{__("Confirm Password")}}</label>
+                <input type="password" value="" name="password_confirmation" required class="form-control" placeholder="{{__("Confirm Password")}}" aria-label="{{__("Confirm Password")}}" aria-describedby="button-addon2">
+            </div>
+            <div class="col-md-3" style= "display:none;">
                 <label class="font-weight-bold">{{__("Permissions")}}</label>
                 @foreach(get_bookable_services() as $service_id=>$service)
-                    <div><label ><input @if(in_array($service_id,old('permissions',[]))) checked @endif type="checkbox" name="permissions[]" value="{{$service_id}}">{{$service::getModelName()}}</label></div>
+                    <div><label ><input @if($service_id =='hotel') checked @endif type="checkbox" name="permissions[]" value="{{$service_id}}">{{$service::getModelName()}}</label></div>
                 @endforeach
             </div>
-        </div>
+        </div><br>
         <button class="btn btn-success"><i class="fa fa-plus"></i> {{__("Add")}}</button>
     </form>
 
     <hr>
-    <h4>{{__("Users on your team")}}</h4>
+    <h4>{{__("Managers")}}</h4>
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-booking-history">
             <thead>
@@ -35,7 +63,7 @@
                 <th width="2%">{{__("#")}}</th>
                 <th>{{__("Display Name")}}</th>
                 <th>{{__("Email")}}</th>
-                <th>{{__("Permissions")}}</th>
+                <!-- <th>{{__("Permissions")}}</th> -->
                 <th>{{__("Status")}}</th>
                 <th>{{__("Actions")}}</th>
             </tr>
@@ -48,7 +76,7 @@
                     <td>
                         {{$vendorTeam->member->email?? ''}}
                     </td>
-                    <td>{{implode(', ',$vendorTeam->permissions)}}</td>
+                    <!-- <td>{{implode(', ',$vendorTeam->permissions)}}</td> -->
                     <td><span class="badge badge-{{$vendorTeam->status_badge}}">{{$vendorTeam->status_text}}</span></td>
                     <td>
                         <div class="dropdown">
@@ -56,7 +84,7 @@
                                 {{__("Actions")}}
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('vendor.team.edit',['vendorTeam'=>$vendorTeam])}}">{{__("Edit")}}</a>
+                                <!-- <a class="dropdown-item" href="{{route('vendor.team.edit',['vendorTeam'=>$vendorTeam])}}">{{__("Edit")}}</a> -->
                                 @if($vendorTeam->status == Modules\Vendor\Models\VendorTeam::STATUS_PENDING)
                                     <a class="dropdown-item" href="{{route('vendor.team.re-send-request',['vendorTeam'=>$vendorTeam])}}">{{__("Send email")}}</a>
                                 @endif

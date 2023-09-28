@@ -58,7 +58,7 @@ class UserController extends AdminController
             'roles' => Role::all(),
             'breadcrumbs'=>[
                 [
-                    'name'=>__("Users"),
+                    'name'=>__(""),
                     'url'=>route('user.admin.index')
                 ]
             ]
@@ -80,7 +80,7 @@ class UserController extends AdminController
             'roles' => Role::all(),
             'breadcrumbs'=>[
                 [
-                    'name'=>__("Users"),
+                    'name'=>__(""),
                     'url'=>route('user.admin.index')
                 ],
                 [
@@ -179,7 +179,7 @@ class UserController extends AdminController
                 'required',
                 'email',
                 'max:255',
-                $id > 0 ? Rule::unique('users')->ignore($row->id) : Rule::unique('users')
+                $id > 0 ? Rule::unique('')->ignore($row->id) : Rule::unique('')
             ],
         ];
 
