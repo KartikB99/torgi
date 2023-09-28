@@ -44,6 +44,20 @@
                             <i class="fa fa-user input-icon"></i>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{__("National Id")}}</label>
+                            <input type="text" value="{{old('national_id',$dataUser->national_id)}}" name="national_id" placeholder="{{__("National Id")}}" class="form-control">
+                            <i class="fa fa-user input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{__("Passport")}}</label>
+                            <input type="text" value="{{old('passport',$dataUser->passport)}}" name="passport" placeholder="{{__("Passport")}}" class="form-control">
+                            <i class="fa fa-user input-icon"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>{{__("Phone Number")}}</label>
