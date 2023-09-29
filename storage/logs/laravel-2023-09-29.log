@@ -1,0 +1,24 @@
+[2023-09-29 10:07:25] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Solutel has created space Paris City Appartments",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space\/edit\/13",
+    "idNotification": "cf365d8a-9b41-4b5e-af0d-8784987618ab",
+    "socket": null
+}  
+[2023-09-29 10:14:34] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Paris City Appartments was updated to Publish by Solutel",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space?id=13",
+    "idNotification": "7b235316-e494-4f17-8e55-e889a1b6a5f1",
+    "socket": null
+}  
+[2023-09-29 10:16:47] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Royal Appartments was updated to Publish by Solutel",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space?id=12",
+    "idNotification": "35b9d8a8-d866-4da4-b39e-0ccd05f2f359",
+    "socket": null
+}  

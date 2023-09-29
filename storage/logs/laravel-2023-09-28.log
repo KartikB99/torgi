@@ -724,3 +724,27 @@
 #70 C:\\xampp\\htdocs\\torgi\\server.php(21): require_once('C:\\\\xampp\\\\htdocs...')
 #71 {main}
 "} 
+[2023-09-28 12:53:17] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Solutel has created space Royal Appartments",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space\/edit\/12",
+    "idNotification": "e6ebafc2-403e-40e2-b41a-21d9a16c8719",
+    "socket": null
+}  
+[2023-09-28 13:06:20] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Royal Appartments was updated to Publish by Solutel",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space?id=12",
+    "idNotification": "83f1f36f-30ac-4a66-afec-928f727a7566",
+    "socket": null
+}  
+[2023-09-28 13:09:44] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "Royal Appartments was updated to Publish by Solutel",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Solutel\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/space?id=12",
+    "idNotification": "eee14ffc-2b01-4172-82c6-1c8460129eda",
+    "socket": null
+}  
