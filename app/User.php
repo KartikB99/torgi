@@ -66,6 +66,7 @@
             'business_name',
             'status',
             'role_id',
+            'vendor_document',
 //            'vendor_plan_id',
 //            'vendor_plan_enable',
 //            'vendor_plan_start_date',

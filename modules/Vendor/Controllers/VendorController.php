@@ -16,6 +16,9 @@ use Modules\User\Events\NewVendorRegistered;
 use Modules\User\Events\SendMailUserRegistered;
 use Modules\Vendor\Models\VendorRequest;
 use Modules\Booking\Models\Booking;
+use Illuminate\Http\UploadedFile;
+use Modules\Media\Helpers\FileHelper;
+use Modules\Media\Traits\HasUpload;
 
 
 class VendorController extends FrontendController
@@ -28,6 +31,7 @@ class VendorController extends FrontendController
     }
     public function register(Request $request)
     {
+        // print_r($request->all());exit;
         $rules = [
             'first_name' => [
                 'required',
@@ -61,6 +65,7 @@ class VendorController extends FrontendController
                     ->uncompromised(),
             ],
             'term'       => ['required'],
+            'file'       => ['required','file','mimes:pdf'],
         ];
         $messages = [
             'email.required'      => __('Email is required field'),
@@ -70,6 +75,8 @@ class VendorController extends FrontendController
             'last_name.required'  => __('The last name is required field'),
             'business_name.required'  => __('The business name is required field'),
             'term.required'       => __('The terms and conditions field is required'),
+            'file.required'       => __('The Attach document CR field is required'),
+            'file.mimes'       => __('Only PDF files allowed'),
         ];
         if (ReCaptchaEngine::isEnable() and setting_item("user_enable_register_recaptcha")) {
             $messages['g-recaptcha-response.required'] = __('Please verify the captcha');
@@ -92,6 +99,22 @@ class VendorController extends FrontendController
                     ], 200);
                 }
             }
+            // print_r($request->all());exit;
+            $file = $request->file('file');
+            $fileName = "";
+            // print_r($file);exit;
+            if(!empty($file))
+            { 
+                $destinationPath = 'public/pdf'; // upload path
+               
+                $fileName = date('YmdHis') . "." . $file->getClientOriginalExtension();
+                // echo $fileName;exit;
+                // $file->move($destinationPath, $imageName);
+                $imageName = $fileName = $file->getClientOriginalName();
+                $check = $file->move($destinationPath, $imageName);
+                //echo $check;exit;
+            }
+            
             $user = new \App\User();
 
             $user = $user->fill([
@@ -101,6 +124,7 @@ class VendorController extends FrontendController
                 'password'=>Hash::make($request->input('password')),
                 'business_name'=>$request->input('business_name'),
                 'phone'=>$request->input('phone'),
+                'vendor_document'=> $fileName,
             ]);
             $user->status = 'publish';
 
