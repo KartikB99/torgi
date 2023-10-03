@@ -113,6 +113,11 @@ class UserController extends FrontendController
                 'alpha_dash',
                 Rule::unique('users')->ignore($user->id)
             ],
+            'national_id' => [
+                'required',
+                'integer',
+                'digits:10', // This rule enforces exactly 10 digits
+            ],
             'phone'       => [
                 'required',
                 Rule::unique('users')->ignore($user->id)

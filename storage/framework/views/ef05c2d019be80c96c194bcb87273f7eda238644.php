@@ -45,6 +45,20 @@
                             <i class="fa fa-user input-icon"></i>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><?php echo e(__("National Id")); ?></label>
+                            <input type="text" value="<?php echo e(old('national_id',$dataUser->national_id)); ?>" name="national_id" placeholder="<?php echo e(__("National Id")); ?>" class="form-control">
+                            <i class="fa fa-user input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><?php echo e(__("Passport")); ?></label>
+                            <input type="text" value="<?php echo e(old('passport',$dataUser->passport)); ?>" name="passport" placeholder="<?php echo e(__("Passport")); ?>" class="form-control">
+                            <i class="fa fa-user input-icon"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label><?php echo e(__("Phone Number")); ?></label>
