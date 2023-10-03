@@ -31,7 +31,6 @@ class VendorController extends FrontendController
     }
     public function register(Request $request)
     {
-        // print_r($request->all());exit;
         $rules = [
             'first_name' => [
                 'required',
@@ -99,20 +98,18 @@ class VendorController extends FrontendController
                     ], 200);
                 }
             }
-            // print_r($request->all());exit;
+            
             $file = $request->file('file');
             $fileName = "";
-            // print_r($file);exit;
+            
             if(!empty($file))
             { 
                 $destinationPath = 'public/pdf'; // upload path
                
                 $fileName = date('YmdHis') . "." . $file->getClientOriginalExtension();
-                // echo $fileName;exit;
-                // $file->move($destinationPath, $imageName);
+                
                 $imageName = $fileName = $file->getClientOriginalName();
                 $check = $file->move($destinationPath, $imageName);
-                //echo $check;exit;
             }
             
             $user = new \App\User();
