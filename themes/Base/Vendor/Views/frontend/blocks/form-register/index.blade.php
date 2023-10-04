@@ -7,7 +7,7 @@
             <div class="col-12 col-lg-5">
                 <h1>{{$title}}</h1>
                 <p class="sub-heading">{{$desc}}</p>
-                <form class="form bravo-form-register-vendor" method="post" action="{{route('vendor.register')}}">
+                <form class="form bravo-form-register-vendor" id="vendor_register" method="post" action="{{route('vendor.register')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -34,6 +34,11 @@
                     <div class="form-group">
                         <input type="password" class="form-control" name="password" autocomplete="off" placeholder="{{__("Password")}}">
                         <span class="invalid-feedback error error-password"></span>
+                    </div>
+                    <div class="form-group">             
+                        <label for="formFileMultiple" class="form-label">Attach Document CR<span class="redtxt">* </span> </label>
+                        <input class="form-control" type="file" id="file" name="file" value="" required="" accept="application/pdf">
+                        <span class="invalid-feedback error error-file"></span>
                     </div>
                     <div class="form-group">
                         <label for="term">

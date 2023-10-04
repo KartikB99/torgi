@@ -7,18 +7,24 @@ $('.bravo-form-register-vendor [type=submit]').click(function (e) {
         }
     });
     var url = form.attr('action');
+    // var formData = new FormData('.bravo-form-register-vendor'); 
+    var formData = new FormData(document.getElementById('vendor_register'));
+             
     $.ajax({
         'url': url,
-        'data': {
-            'email': form.find('input[name=email]').val(),
-            'password': form.find('input[name=password]').val(),
-            'first_name': form.find('input[name=first_name]').val(),
-            'last_name': form.find('input[name=last_name]').val(),
-            'business_name': form.find('input[name=business_name]').val(),
-            'phone': form.find('input[name=phone]').val(),
-            'term': form.find('input[name=term]').is(":checked") ? 1 : '',
-            'g-recaptcha-response': form.find('[name=g-recaptcha-response]').val(),
-        },
+        'data': formData,
+        'processData': false,
+        'contentType': false,
+        // 'data': {
+        //     'email': form.find('input[name=email]').val(),
+        //     'password': form.find('input[name=password]').val(),
+        //     'first_name': form.find('input[name=first_name]').val(),
+        //     'last_name': form.find('input[name=last_name]').val(),
+        //     'business_name': form.find('input[name=business_name]').val(),
+        //     'phone': form.find('input[name=phone]').val(),
+        //     'term': form.find('input[name=term]').is(":checked") ? 1 : '',
+        //     'g-recaptcha-response': form.find('[name=g-recaptcha-response]').val(),
+        // },
         'type': 'POST',
         beforeSend: function () {
             form.find('.error').hide();
