@@ -47,5 +47,18 @@
                 {{__("Pay now")}}
             </a>
         @endif
+
+        <!-- shoud not be here needs in vender pannel -->
+        @if($booking->statusName=='Processing')
+            <a href="{{route('booking.checkout',['code'=>$booking->code])}}" class="btn btn-xs btn-primary btn-info-booking open-new-window mt-1">
+                {{__("Accept")}}
+            </a>
+
+            <a href="{{route('booking.checkout',['code'=>$booking->code])}}" class="btn btn-xs btn-primary btn-info-booking open-new-window mt-1">
+                {{__("Reject")}}
+            </a>
+        @else
+            <!-- skip -->
+        @endif
     </td>
 </tr>
