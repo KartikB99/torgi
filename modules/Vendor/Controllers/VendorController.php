@@ -104,12 +104,12 @@ class VendorController extends FrontendController
             
             if(!empty($file))
             { 
-                $destinationPath = 'public/pdf'; // upload path
+                $destinationPath = '/public/pdf'; // upload path
                
                 $fileName = date('YmdHis') . "." . $file->getClientOriginalExtension();
                 
-                $imageName = $fileName = $file->getClientOriginalName();
-                $check = $file->move($destinationPath, $imageName);
+                $imageName = $file->getClientOriginalName();
+                $check = $file->move($destinationPath, $fileName);
             }
             
             $user = new \App\User();
