@@ -1,1 +1,2 @@
 ALTER TABLE `users` ADD `national_id` VARCHAR(255) NULL DEFAULT NULL AFTER `last_name`, ADD `passport` VARCHAR(255) NULL DEFAULT NULL AFTER `national_id`;
+ALTER TABLE `users` ADD `vendor_document` VARCHAR(256) NULL DEFAULT NULL AFTER `total_before_fees`;
