@@ -47,8 +47,16 @@ class AppartmentImport implements ToModel, WithHeadingRow
         if($row['banner_image'] != "")
         {
 
-            $url = $row['banner_image'];
-
+            $url = $row['banner_image'];    
+            $headers = get_headers($url, 1);
+            $contentType = $headers['Content-Type'];
+            $fileExtensions = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/gif' => 'gif',
+            ];
+        
+            $fileExtension = $fileExtensions[$contentType] ?? null;
             $contents = file_get_contents($url);
 
             if ($contents === false) {
@@ -61,7 +69,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
             $newFileName = md5(microtime(true).rand(0,999));
 
             $filePath = storage_path($folder);
-            $fileName = $newFileName.'.jpg'; 
+            $fileName = $newFileName.'.'.$fileExtension; 
 
             if (!is_dir($filePath)) {
                 mkdir($filePath, 0755, true);
@@ -69,6 +77,15 @@ class AppartmentImport implements ToModel, WithHeadingRow
 
             $file = $filePath . '/' . $fileName;
             file_put_contents($file, $contents);
+            
+        // Save file to the public disk
+        $pubdir = 'uploads/0000/'.$author_id.'/'. date('Y/m/d');
+        if (!is_dir($pubdir)) {
+            mkdir($pubdir, 0755, true);
+        }
+        $pub = $pubdir.'/'.$fileName;
+        $destinationPath = public_path($pub);
+        file_put_contents($destinationPath, $contents);
 
             $path = str_replace('private/','',$file);
             $file_path = "";
@@ -79,7 +96,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
             $bid = DB::table('media_files')->insertGetId([
                     'file_path'=>$file_path,
                     'file_name'=>$fileName,
-                    'file_type'=>'image/jpeg',
+                    'file_type'=>$contentType,
                     'file_extension'=> '.jpg',
                     'create_user'=>$author_id,
                     'author_id'=>$author_id
@@ -129,7 +146,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
         if ($row['location'] !='') {
 
             $array = DB::table('bravo_locations')->select('id')->where('name',$row['location'])->first();
-            //print_r($array);exit;
+            
             if(!empty($array) && $array->id !=''){
                 $loc_id = $array->id;            
             }else{

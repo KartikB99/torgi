@@ -55,6 +55,15 @@ class RoomImport implements ToModel, WithHeadingRow
         {
 
             $url = $row['feature_image'];
+            $headers = get_headers($url, 1);
+            $contentType = $headers['Content-Type'];
+            $fileExtensions = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/gif' => 'gif',
+            ];
+        
+            $fileExtension = $fileExtensions[$contentType] ?? null;
 
             $contents = file_get_contents($url);
 
@@ -76,6 +85,15 @@ class RoomImport implements ToModel, WithHeadingRow
 
             $file = $filePath . '/' . $fileName;
             file_put_contents($file, $contents);
+
+            // Save file to the public disk
+            $pubdir = 'uploads/0000/'.$author_id.'/'. date('Y/m/d');
+            if (!is_dir($pubdir)) {
+                mkdir($pubdir, 0755, true);
+            }
+            $pub = $pubdir.'/'.$fileName;
+            $destinationPath = public_path($pub);
+            file_put_contents($destinationPath, $contents);
 
             $path = str_replace('private/','',$file);
             $file_path = "";
