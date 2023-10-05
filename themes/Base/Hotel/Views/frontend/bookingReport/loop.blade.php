@@ -64,5 +64,14 @@
             </a>
             @include ($service->set_paid_modal_file ?? '')
         @endif
+
+        <!-- shoud not be here needs in vender pannel -->
+        @if($booking->statusName!='Completed')
+        <a class="btn btn-xs btn-primary btn-info-booking" data-ajax="{{route('booking.modal',['booking'=>$booking])}}" data-toggle="modal" data-id="{{$booking->id}}" data-target="#modal_booking_cancel">
+                <i class="fa fa-info-circle"></i>{{__("Cancel")}}
+            </a>
+        @else
+            <!-- skip -->
+        @endif
     </td>
 </tr>
