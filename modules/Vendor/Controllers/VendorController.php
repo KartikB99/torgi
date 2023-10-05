@@ -19,6 +19,7 @@ use Modules\Booking\Models\Booking;
 use Illuminate\Http\UploadedFile;
 use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Traits\HasUpload;
+use Illuminate\Support\Facades\URL;
 
 
 class VendorController extends FrontendController
@@ -31,6 +32,8 @@ class VendorController extends FrontendController
     }
     public function register(Request $request)
     {
+        $baseUrl = URL::to('/');
+        //echo $baseUrl;exit;
         $rules = [
             'first_name' => [
                 'required',
@@ -104,12 +107,12 @@ class VendorController extends FrontendController
             
             if(!empty($file))
             { 
-                $destinationPath = 'public/pdf'; // upload path
+                $destinationPath = public_path('uploads/pdf'); // upload path
                
                 $fileName = date('YmdHis') . "." . $file->getClientOriginalExtension();
                 
-                $imageName = $fileName = $file->getClientOriginalName();
-                $check = $file->move($destinationPath, $imageName);
+                $imageName = $file->getClientOriginalName();
+                $check = $file->move($destinationPath, $fileName);
             }
             
             $user = new \App\User();
