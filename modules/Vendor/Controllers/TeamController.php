@@ -9,6 +9,7 @@ use Modules\FrontendController;
 use Modules\Vendor\Events\VendorTeamRequestCreatedEvent;
 use Modules\Vendor\Models\VendorTeam;
 use Illuminate\Support\Facades\Validator;
+use Hash;
 
 class TeamController extends FrontendController
 {
@@ -51,7 +52,7 @@ class TeamController extends FrontendController
             'last_name'=>$request->input('lname'),
             'name'=>$request->input('fname')." ".$request->input('lname'),
             'email'=>$request->input('email'),
-            'password'=>$request->input('password'),
+            'password'=>Hash::make($request->input('password')),
             'phone'=> $request->input('phone'),
             'user_name'=> $request->input('fname'),
             'role_id' => (int)4,

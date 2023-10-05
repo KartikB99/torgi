@@ -107,6 +107,16 @@ class AppartmentImport implements ToModel, WithHeadingRow
 
             $url = $row['image'];
 
+            $headers = get_headers($url, 1);
+            $contentType = $headers['Content-Type'];
+            $fileExtensions = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/gif' => 'gif',
+            ];
+        
+            $fileExtension = $fileExtensions[$contentType] ?? null;
+
             $contents = file_get_contents($url);
 
             if ($contents === false) {
@@ -128,6 +138,16 @@ class AppartmentImport implements ToModel, WithHeadingRow
             $file = $filePath . '/' . $fileName;
             file_put_contents($file, $contents);
 
+            // Save file to the public disk
+            $pubdir = 'uploads/0000/'.$author_id.'/'. date('Y/m/d');
+            if (!is_dir($pubdir)) {
+                mkdir($pubdir, 0755, true);
+            }
+            $pub = $pubdir.'/'.$fileName;
+            $destinationPath = public_path($pub);
+            file_put_contents($destinationPath, $contents);
+
+
             $path = str_replace('private/','',$file);
             $file_path = "";
             $filepath = explode("storage", $path);
@@ -137,8 +157,8 @@ class AppartmentImport implements ToModel, WithHeadingRow
             $imid = DB::table('media_files')->insertGetId([
                     'file_path'=>$file_path,
                     'file_name'=>$fileName,
-                    'file_type'=>'image/jpeg',
-                    'file_extension'=> '.jpg',
+                    'file_type'=>$contentType,
+                    'file_extension'=> $fileExtension,
                     'create_user'=>$author_id,
                     'author_id'=>$author_id
                     ]);    
