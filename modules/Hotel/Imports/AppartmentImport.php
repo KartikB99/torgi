@@ -78,9 +78,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
             $file = $filePath . '/' . $fileName;
             file_put_contents($file, $contents);
             
-            //$filePath = $file; 
-            
-        // Define the destination path in the public disk
+        // Save file to the public disk
         $pubdir = 'uploads/0000/'.$author_id.'/'. date('Y/m/d');
         if (!is_dir($pubdir)) {
             mkdir($pubdir, 0755, true);
@@ -148,7 +146,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
         if ($row['location'] !='') {
 
             $array = DB::table('bravo_locations')->select('id')->where('name',$row['location'])->first();
-            //print_r($array);exit;
+            
             if(!empty($array) && $array->id !=''){
                 $loc_id = $array->id;            
             }else{

@@ -86,7 +86,7 @@ class RoomImport implements ToModel, WithHeadingRow
             $file = $filePath . '/' . $fileName;
             file_put_contents($file, $contents);
 
-            // Define the destination path in the public disk
+            // Save file to the public disk
             $pubdir = 'uploads/0000/'.$author_id.'/'. date('Y/m/d');
             if (!is_dir($pubdir)) {
                 mkdir($pubdir, 0755, true);
