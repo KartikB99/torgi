@@ -51,6 +51,52 @@
                 {{__("No Booking History")}}
             @endif
         </div>
+
+        <div class="modal" tabindex="-1" id="modal_booking_detail">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{__('Booking ID: #')}} <span class="user_id"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center">{{__("Loading...")}}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="modal_booking_cancel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{__(' Cancel Booking ID: #')}} <span class="user_id"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route("vendor.send_booking.cancel_request") }}" method="post">
+                        @csrf
+                        <input type="hidden" class="booking_id" name="booking_id" id="booking_id"><br>
+                        <textarea name="reason_of_cancel" id="" placeholder="Write Reason of cancel"></textarea><br>
+                        <!-- <input type="submit" name="cancel_booking" id="cancel_booking" value="Send Cancel Request"> -->
+                        <input type="submit" class="btn btn-primary" value="{{__("Send Cancel Request")}}">
+                    </form>
+                    
+                    <!-- <div class="modal-body">
+                        <div class="d-flex justify-content-center">{{__("Loading...")}}</div>
+                    </div> -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
@@ -72,5 +118,38 @@
                 }
             });
         });
+    </script>
+@endpush
+
+@push('js')
+    <script>
+
+        $('#modal_booking_detail').on('show.bs.modal',function (e){
+            var btn = $(e.relatedTarget);
+            $(this).find('.user_id').html(btn.data('id'));
+            $(this).find('.modal-body').html('<div class="d-flex justify-content-center">{{__("Loading...")}}</div>');
+            var modal = $(this);
+            $.get(btn.data('ajax'), function (html){
+                    modal.find('.modal-body').html(html);
+                }
+            )
+        })
+    </script>
+@endpush
+
+@push('js')
+    <script>
+
+        $('#modal_booking_cancel').on('show.bs.modal',function (e){
+            var btn = $(e.relatedTarget);
+            $(this).find('.user_id').html(btn.data('id'));
+            $('#booking_id').val(btn.data('id'));
+            $(this).find('.modal-body').html('<div class="d-flex justify-content-center">{{__("Loading...")}}</div>');
+            var modal = $(this);
+            $.get(btn.data('ajax'), function (html){
+                    modal.find('.modal-body').html(html);
+                }
+            )
+        })
     </script>
 @endpush
