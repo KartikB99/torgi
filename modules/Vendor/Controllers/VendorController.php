@@ -180,4 +180,39 @@ class VendorController extends FrontendController
         ];
         return view('Vendor::frontend.bookingReport.index', $data);
     }
+
+    public function SendBookingCancelRequest(Request $request)
+    {
+        if(is_demo_mode()){
+            return back()->with('error',"Demo mode: disabled");
+        }
+
+        $request->validate([
+            'reason_of_cancel' => 'required',
+            'booking_id' => 'required',
+        ]);
+
+        $booking_id=$request->get('booking_id');
+        $reason_of_cancel=$request->get('reason_of_cancel');
+
+        if ($request->get('reason_of_cancel')!="") {
+            $data = [
+                'id' =>  $booking_id,
+                'event'=>'UserSubscriberSubmit',
+                'to'=>'admin',
+                'name' =>  __('Someone'),
+                'avatar' =>  '',
+                'link' => route('user.admin.subscriber.index'),
+                'type' => 'subscriber',
+                'message' => __('You have just gotten a new Subscriber')
+            ];
+            //dd($user = User::query()->select("users.*")->hasPermission("dashboard_access")->first());
+            //Auth::user()->notify(new AdminChannelServices($data));
+            
+
+            return redirect()->back()->with("error", __("xxxxxaaaaaa Your current password does not matches with the password you provided. Please try again.".$reason_of_cancel));
+        }
+
+        return redirect()->back()->with('success', __('Password changed successfully !'));
+    }
 }

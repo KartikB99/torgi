@@ -31,6 +31,8 @@ Route::group(['prefix'=>'vendor','middleware' => ['auth']],function(){
         Route::get('/delete/{vendorTeam}','TeamController@delete')->name("delete")->middleware('signed');
     });
 
+    Route::post('/profile/change-password','VendorController@SendBookingCancelRequest')->name("vendor.send_booking.cancel_request");
+
 });
 
 Route::group(['prefix'=>'vendor/enquiry-report'],function(){
