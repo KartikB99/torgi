@@ -55,13 +55,13 @@ class ModuleProvider extends ModuleServiceProvider
         ];
 
 
-        $res['enquiry']= [
-            'position'   => 82,
-            'icon'       => 'icofont-ebook',
-            'url'        => route('vendor.enquiry_report'),
-            'title'      => __("Enquiry Report"),
-            'permission' => 'enquiry_view',
-        ];
+        // $res['enquiry']= [
+        //     'position'   => 82,
+        //     'icon'       => 'icofont-ebook',
+        //     'url'        => route('vendor.enquiry_report'),
+        //     'title'      => __("Enquiry Report"),
+        //     'permission' => 'enquiry_view',
+        // ];
 
         if(!setting_item('disable_payout'))
         {
