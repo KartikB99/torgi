@@ -104,8 +104,8 @@ class RoomImport implements ToModel, WithHeadingRow
             $bid = DB::table('media_files')->insertGetId([
                     'file_path'=>$file_path,
                     'file_name'=>$fileName,
-                    'file_type'=>'image/jpeg',
-                    'file_extension'=> '.jpg',
+                    'file_type'=>$contentType,
+                    'file_extension'=> $fileExtension,
                     'create_user'=>$author_id,
                     'author_id'=>$author_id
                     ]);    
