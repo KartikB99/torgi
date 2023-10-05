@@ -1,45 +1,85 @@
 <?php
 $dataUser = Auth::user();
-$menus = [
-    'dashboard'       => [
-        'url'        => route("vendor.dashboard"),
-        'title'      => __("Dashboard"),
-        'icon'       => 'fa fa-home',
-        'permission' => 'dashboard_vendor_access',
-        'position'   => 10
-    ],
-    'booking-history' => [
-        'url'      => route("user.booking_history"),
-        'title'    => __("Booking History"),
-        'icon'     => 'fa fa-clock-o',
-        'position' => 20
-    ],
-    "wishlist"=>[
-        'url'   => route("user.wishList.index"),
-        'title' => __("Wishlist"),
-        'icon'  => 'fa fa-heart-o',
-        'position' => 21
-    ],
-    'profile'         => [
-        'url'      => route("user.profile.index"),
-        'title'    => __("My Profile"),
-        'icon'     => 'fa fa-cogs',
-        'position' => 22
-    ],
-    'password'        => [
-        'url'      => route("user.change_password"),
-        'title'    => __("Change password"),
-        'icon'     => 'fa fa-lock',
-        'position' => 100
-    ],
-    'admin'           => [
-        'url'        => route('admin.index'),
-        'title'      => __("Admin Dashboard"),
-        'icon'       => 'icon ion-ios-ribbon',
-        'permission' => 'dashboard_access',
-        'position'   => 110
-    ]
-];
+$menus = [];
+if($dataUser['role_id'] == 3){
+    $menus = [
+        'dashboard'       => [
+            'url'        => route("vendor.dashboard"),
+            'title'      => __("Dashboard"),
+            'icon'       => 'fa fa-home',
+            'permission' => 'dashboard_vendor_access',
+            'position'   => 10
+        ],
+        'booking-history' => [
+            'url'      => route("user.booking_history"),
+            'title'    => __("Booking History"),
+            'icon'     => 'fa fa-clock-o',
+            'position' => 20
+        ],
+        "wishlist"=>[
+            'url'   => route("user.wishList.index"),
+            'title' => __("Wishlist"),
+            'icon'  => 'fa fa-heart-o',
+            'position' => 21
+        ],
+        'profile'         => [
+            'url'      => route("user.profile.index"),
+            'title'    => __("My Profile"),
+            'icon'     => 'fa fa-cogs',
+            'position' => 22
+        ],
+        'password'        => [
+            'url'      => route("user.change_password"),
+            'title'    => __("Change password"),
+            'icon'     => 'fa fa-lock',
+            'position' => 100
+        ],
+        'admin'           => [
+            'url'        => route('admin.index'),
+            'title'      => __("Admin Dashboard"),
+            'icon'       => 'icon ion-ios-ribbon',
+            'permission' => 'dashboard_access',
+            'position'   => 110
+        ]
+    ];
+}
+else{
+    $menus = [
+        'dashboard'       => [
+            'url'        => route("vendor.dashboard"),
+            'title'      => __("Dashboard"),
+            'icon'       => 'fa fa-home',
+            'permission' => 'dashboard_vendor_access',
+            'position'   => 10
+        ],
+        'booking-history' => [
+            'url'      => route("user.booking_history"),
+            'title'    => __("Booking History"),
+            'icon'     => 'fa fa-clock-o',
+            'position' => 20
+        ],
+        'profile'         => [
+            'url'      => route("user.profile.index"),
+            'title'    => __("My Profile"),
+            'icon'     => 'fa fa-cogs',
+            'position' => 22
+        ],
+        'password'        => [
+            'url'      => route("user.change_password"),
+            'title'    => __("Change password"),
+            'icon'     => 'fa fa-lock',
+            'position' => 100
+        ],
+        'admin'           => [
+            'url'        => route('admin.index'),
+            'title'      => __("Admin Dashboard"),
+            'icon'       => 'icon ion-ios-ribbon',
+            'permission' => 'dashboard_access',
+            'position'   => 110
+        ]
+    ];
+}
+
 
 // Modules
 $custom_modules = \Modules\ServiceProvider::getModules();
