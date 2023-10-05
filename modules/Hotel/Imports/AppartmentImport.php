@@ -97,7 +97,7 @@ class AppartmentImport implements ToModel, WithHeadingRow
                     'file_path'=>$file_path,
                     'file_name'=>$fileName,
                     'file_type'=>$contentType,
-                    'file_extension'=> '.jpg',
+                    'file_extension'=> $fileExtension,
                     'create_user'=>$author_id,
                     'author_id'=>$author_id
                     ]);    
