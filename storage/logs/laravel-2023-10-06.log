@@ -1,0 +1,16 @@
+[2023-10-06 08:43:52] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "JW Marriott Hotel was updated to Publish by Vendor",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Vendor\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/hotel?id=70",
+    "idNotification": "2e0b0df0-8046-43d1-a2c8-ed8224d67eee",
+    "socket": null
+}  
+[2023-10-06 08:49:31] local.INFO: Broadcasting [App\Events\PusherNotificationAdminEvent] on channels [admin-channel] with payload:
+{
+    "message": "JW Marriott Hotel 4 was updated to Publish by Vendor",
+    "avatar": "<img class=\"image-responsive\" src=\"http:\/\/localhost:8000\/images\/avatar.png\" alt=\"Vendor\">",
+    "link": "http:\/\/localhost:8000\/admin\/module\/hotel?id=74",
+    "idNotification": "734f2d3c-16ae-48c4-af0c-206249e8c356",
+    "socket": null
+}  
