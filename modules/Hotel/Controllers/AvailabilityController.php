@@ -61,7 +61,8 @@ class AvailabilityController extends FrontendController{
     }
 
     public function index(Request $request,$hotel_id){
-
+        // print_r($this->checkPermission);exit;
+        
         $this->checkPermission('hotel_create');
 
         if(!$this->hasHotelPermission($hotel_id))
@@ -92,11 +93,11 @@ class AvailabilityController extends FrontendController{
         }
         $breadcrumbs = [
             [
-                'name' => __('Hotels'),
+                'name' => __('Apartment'),
                 'url'  => route('hotel.vendor.index')
             ],
             [
-                'name' => __('Hotel: :name',['name'=>$this->currentHotel->title]),
+                'name' => __('Apartment: :name',['name'=>$this->currentHotel->title]),
                 'url'  => route('hotel.vendor.edit',[$this->currentHotel->id])
             ],
             [

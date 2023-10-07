@@ -5,6 +5,8 @@
     </h2>
 <div class="panel">
     <!-- <div class="panel-title"><strong>{{__('Import Apartment')}}</strong></div> -->
+    <a href="{{route('hotel.vendor.room.index',['hotel_id'=>app('request')->input('hotel_id')])}}" class="btn btn-info btn-xs float-right"><i class="fa fa-hand-o-right"></i> {{__("Manage Rooms")}}</a>
+    
     @if (count($errors) > 0)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <ul>

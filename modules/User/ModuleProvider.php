@@ -171,7 +171,7 @@ class ModuleProvider extends ModuleServiceProvider
         //     'enable' => true,
         //     'position' => 95,
         // ];
-        
+        if($user->role_id == 2)
         $res['my_plan'] = [
                 'url' => 'vendor/team',
                 'title' => __("Managers"),

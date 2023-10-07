@@ -19,6 +19,7 @@ use Modules\Hotel\Models\HotelTerm;
 use Modules\Hotel\Models\HotelTranslation;
 use Modules\Location\Models\LocationCategory;
 use Modules\User\Models\Plan;
+use DB;
 
 class VendorController extends FrontendController
 {
@@ -57,13 +58,22 @@ class VendorController extends FrontendController
     public function index(Request $request)
     {
         $this->checkPermission('hotel_view');
+        $user = Auth::user();
         $user_id = Auth::id();
-        $list_hotel = $this->hotelClass::where("author_id", $user_id)->orderBy('id', 'desc');
+        $list_hotel = [];
+        if($user->role_id == 2){
+            $list_hotel = $this->hotelClass::where("author_id", $user_id)->orderBy('id', 'desc');
+        }
+        if($user->role_id == 4){
+            $team = DB::table('vendor_team')->select('vendor_id')->where('member_id',$user_id)->first(); 
+            $list_hotel = $this->hotelClass::where("author_id", $team->vendor_id)->orderBy('id', 'desc');
+            
+        }
         $data = [
             'rows' => $list_hotel->paginate(5),
             'breadcrumbs'        => [
                 [
-                    'name' => __('Manage Hotels'),
+                    'name' => __('Manage Apartment'),
                     'url'  => route('hotel.vendor.index')
                 ],
                 [
@@ -71,7 +81,7 @@ class VendorController extends FrontendController
                     'class' => 'active'
                 ],
             ],
-            'page_title'         => __("Manage Hotels"),
+            'page_title'         => __("Manage Apartment"),
         ];
         return view('Hotel::frontend.vendorHotel.index', $data);
     }
@@ -221,7 +231,16 @@ class VendorController extends FrontendController
     {
         $this->checkPermission('hotel_update');
         $user_id = Auth::id();
-        $row = $this->hotelClass::where("author_id", $user_id);
+        $user = Auth::user();
+        $row = [];
+        if($user->role_id == 2){
+            $row = $this->hotelClass::where("author_id", $user_id);
+        }
+        if($user->role_id == 4){
+            $team = DB::table('vendor_team')->select('vendor_id')->where('member_id',$user_id)->first(); 
+            $row = $this->hotelClass::where("author_id", $team->vendor_id);
+        }
+        
         $row = $row->find($id);
         if (empty($row)) {
             return redirect(route('hotel.vendor.index'))->with('warning', __('Space not found!'));
@@ -236,7 +255,7 @@ class VendorController extends FrontendController
             "selected_terms" => $row->terms->pluck('term_id'),
             'breadcrumbs'        => [
                 [
-                    'name' => __('Manage Hotels'),
+                    'name' => __('Manage Apartment'),
                     'url'  => route('hotel.vendor.index')
                 ],
                 [
@@ -244,7 +263,7 @@ class VendorController extends FrontendController
                     'class' => 'active'
                 ],
             ],
-            'page_title'         => __("Edit Hotels"),
+            'page_title'         => __("Edit Apartments"),
         ];
         return view('Hotel::frontend.vendorHotel.detail', $data);
     }
