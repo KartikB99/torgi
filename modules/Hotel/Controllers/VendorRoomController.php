@@ -66,11 +66,11 @@ class VendorRoomController extends FrontendController
             'rows'               => $query->with(['author'])->paginate(20),
             'breadcrumbs'        => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartment'),
                     'url'  => route('hotel.vendor.index')
                 ],
                 [
-                    'name' => __('Hotel: :name',['name'=>$this->currentHotel->title]),
+                    'name' => __('Apartment: :name',['name'=>$this->currentHotel->title]),
                     'url'  => route('hotel.vendor.edit',[$this->currentHotel->id])
                 ],
                 [
@@ -104,11 +104,11 @@ class VendorRoomController extends FrontendController
             'enable_multi_lang'=>true,
             'breadcrumbs'    => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartments'),
                     'url'  => route('hotel.vendor.index')
                 ],
                 [
-                    'name' => __('Hotel: :name',['name'=>$this->currentHotel->title]),
+                    'name' => __('Apartment: :name',['name'=>$this->currentHotel->title]),
                     'url'  => route('hotel.vendor.edit',[$this->currentHotel->id])
                 ],
                 [
@@ -150,11 +150,11 @@ class VendorRoomController extends FrontendController
             'enable_multi_lang'=>true,
             'breadcrumbs'    => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartments'),
                     'url'  => route('hotel.vendor.index')
                 ],
                 [
-                    'name' => __('Hotel: :name',['name'=>$this->currentHotel->title]),
+                    'name' => __('Apartment: :name',['name'=>$this->currentHotel->title]),
                     'url'  => route('hotel.vendor.edit',[$this->currentHotel->id])
                 ],
                 [
@@ -173,7 +173,7 @@ class VendorRoomController extends FrontendController
     }
 
     public function store( Request $request, $hotel_id,$id ){
-        print_r($request->all());exit;
+        
         if(!$this->hasHotelPermission($hotel_id))
         {
             abort(403);
