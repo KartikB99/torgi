@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules\Password;
 use Matrix\Exception;
 use Modules\FrontendController;
 use Modules\User\Events\NewVendorRegistered;
+use Modules\Booking\Events\BookingCancelRequestEvent;
 use Modules\User\Events\SendMailUserRegistered;
 use Modules\Vendor\Models\VendorRequest;
 use Modules\Booking\Models\Booking;
@@ -197,7 +198,7 @@ class VendorController extends FrontendController
 
         if ($request->get('reason_of_cancel')!="") {
             $data = [
-                'id' =>  $booking_id,
+                'id' =>  23,
                 'event'=>'UserSubscriberSubmit',
                 'to'=>'admin',
                 'name' =>  __('Someone'),
@@ -206,11 +207,21 @@ class VendorController extends FrontendController
                 'type' => 'subscriber',
                 'message' => __('You have just gotten a new Subscriber')
             ];
-            //dd($user = User::query()->select("users.*")->hasPermission("dashboard_access")->first());
-            //Auth::user()->notify(new AdminChannelServices($data));
+            
+            $booking = Booking::where('id', $booking_id)->first();
+            $booking->reason_of_cancel = $reason_of_cancel;
+            //dd($booking);
+            if (empty($booking)) {
+                return $this->sendError(__('Booking not found'));
+            }
+            //dd($booking);
+            $result=event(new BookingCancelRequestEvent($booking));
+
+            //print_r($result);exit;
+    
             
 
-            return redirect()->back()->with("error", __("xxxxxaaaaaa Your current password does not matches with the password you provided. Please try again.".$reason_of_cancel));
+            return redirect()->back()->with('success', __('Cancel request sent successfully to Admin !'));
         }
 
         return redirect()->back()->with('success', __('Password changed successfully !'));

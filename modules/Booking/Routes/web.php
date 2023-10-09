@@ -15,6 +15,7 @@ Route::group(['prefix'=>config('booking.booking_route_prefix')],function(){
     //inquiry
     Route::post('/addEnquiry','BookingController@addEnquiry');
     Route::post('/setPaidAmount','BookingController@setPaidAmount')->name('booking.setPaidAmount')->middleware(['auth','dashboard']);
+    Route::post('/CancelBooking','BookingController@CancelBooking')->name('booking.CancelBooking')->middleware(['auth','dashboard']);
 
     Route::get('/modal/{booking}','BookingController@modal')->name('booking.modal');
 });

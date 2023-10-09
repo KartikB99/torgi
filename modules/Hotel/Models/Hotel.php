@@ -31,6 +31,7 @@ class Hotel extends Bookable
     public    $checkout_booking_detail_modal_file = 'Hotel::frontend/booking/detail-modal';
 
     public    $set_paid_modal_file                = 'Hotel::frontend/booking/set-paid-modal';
+    public    $cencel_booking_modal_file          = 'Hotel::frontend/booking/cancel-booking-modal';
     public    $email_new_booking_file             = 'Hotel::emails.new_booking_detail';
     protected $fillable      = [
         'title',

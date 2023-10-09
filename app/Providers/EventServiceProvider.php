@@ -6,8 +6,12 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Booking\Events\EnquirySendEvent;
+use Modules\Booking\Events\BookingCancelRequestEvent;
+use Modules\Booking\Events\BookingCancelEvent;
+use Modules\Booking\Listeners\BookingCancelListen;
 use Modules\Booking\Listeners\EnquiryNotifyListen;
 use Modules\Booking\Listeners\EnquirySendListen;
+use Modules\Booking\Listeners\BookingCancelRequestListen;
 use Modules\User\Events\NewVendorRegistered;
 use Modules\User\Events\SendMailUserRegistered;
 use Modules\User\Events\VendorApproved;
@@ -54,6 +58,12 @@ class EventServiceProvider extends ServiceProvider
         EnquirySendEvent::class=>[
             EnquirySendListen::class,
             EnquiryNotifyListen::class
+        ],
+        BookingCancelRequestEvent::class=>[
+            BookingCancelRequestListen::class
+        ],
+        BookingCancelEvent::class=>[
+            BookingCancelListen::class
         ]
     ];
 
