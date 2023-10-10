@@ -410,4 +410,15 @@ class UserController extends AdminController
         }
     }
 
+    public function download($filename)
+    {
+        $filePath = public_path('uploads/pdf/'.$filename);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $filename);
+        } else {
+            abort(404); // File not found
+        }
+    }
+
 }

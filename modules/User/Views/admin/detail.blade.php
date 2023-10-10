@@ -145,7 +145,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="panel">
+                    <!-- <div class="panel">
                         <div class="panel-title"><strong>{{ __('Vendor')}}</strong></div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -166,7 +166,17 @@
                                 </div>
                             </div>
                         </div>
+                    </div> -->
+                    @if($row->role_id == 2)
+                    <div class="panel">
+                        <div class="panel-title"><strong>{{ __('Vendor Document')}}</strong></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <a href="{{ route('download', ['filename' => $row->vendor_document]) }}" target="_blank" class="dropdown-item"><i class="fa fa-file"></i> {{__("View Document")}}</a>
+                            </div>
+                        </div>
                     </div>
+                    @endif
                     <div class="panel">
                         <div class="panel-title"><strong>{{ __('Avatar')}}</strong></div>
                         <div class="panel-body">
