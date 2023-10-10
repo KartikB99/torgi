@@ -44,7 +44,7 @@ class AttributeController extends AdminController
             'translation'    => new AttributesTranslation(),
             'breadcrumbs' => [
                 [
-                    'name' => __('Hotel'),
+                    'name' => __('Apartment'),
                     'url'  => route('hotel.admin.index')
                 ],
                 [
