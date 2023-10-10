@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Mockery\Exception;
 use Modules\Booking\Events\BookingCreatedEvent;
 use Modules\Booking\Events\BookingUpdatedEvent;
+use Modules\Booking\Events\BookingCancelEvent;
 use Modules\Booking\Events\EnquirySendEvent;
 use Modules\Booking\Events\SetPaidAmountEvent;
 use Modules\Booking\Models\BookingPassenger;
@@ -182,6 +183,12 @@ class BookingController extends \App\Http\Controllers\Controller
             'last_name'       => 'required|string|max:255',
             'email'           => 'required|string|email|max:255',
             'phone'           => 'required|string|max:255',
+            'national_id' => [
+                'required',
+                'integer',
+                'digits:10', // This rule enforces exactly 10 digits
+            ],
+            'passport' => 'required',
             'country' => 'required',
             'term_conditions' => 'required',
         ];
@@ -333,6 +340,8 @@ class BookingController extends \App\Http\Controllers\Controller
             $user->first_name = $request->input('first_name');
             $user->last_name = $request->input('last_name');
             $user->email = $request->input('email');
+            $user->national_id = $request->input('national_id');
+            $user->passport = $request->input('passport');
             $user->phone = $request->input('phone');
             $user->address = $request->input('address_line_1');
             $user->address2 = $request->input('address_line_2');
@@ -341,6 +350,7 @@ class BookingController extends \App\Http\Controllers\Controller
             $user->zip_code = $request->input('zip_code');
             $user->country = $request->input('country');
             $user->password = bcrypt($request->input('password'));
+            $user->status = "publish";
             $user->save();
             event(new Registered($user));
             Auth::loginUsingId($user->id);
@@ -354,6 +364,7 @@ class BookingController extends \App\Http\Controllers\Controller
 
         $booking->addMeta('locale',app()->getLocale());
         $booking->addMeta('how_to_pay',$how_to_pay);
+        $booking->customer_id = $user->id;
 
         // Save Passenger
         $this->savePassengers($booking,$request);
@@ -378,7 +389,6 @@ class BookingController extends \App\Http\Controllers\Controller
             if(!empty($booking->coupon_amount) and $booking->coupon_amount > 0 and $booking->total == 0){
                 $booking->status = $booking::PAID;
             }
-
             $booking->save();
             event(new BookingCreatedEvent($booking));
             return $this->sendSuccess( [
@@ -653,7 +663,7 @@ class BookingController extends \App\Http\Controllers\Controller
         event(new SetPaidAmountEvent($booking));
         if($remain == 0){
             $booking->status = $booking::PAID;
-//            $booking->sendStatusUpdatedEmails();
+            //$booking->sendStatusUpdatedEmails();
             event(new BookingUpdatedEvent($booking));
         }
 
@@ -661,6 +671,40 @@ class BookingController extends \App\Http\Controllers\Controller
 
         return $this->sendSuccess([
             'message' => __("You booking has been changed successfully")
+        ]);
+    }
+
+    public function CancelBooking(Request $request){
+        $rules =  [
+            'id' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return $this->sendError('', ['errors' => $validator->errors()]);
+        }
+
+        $id = $request->input('id');
+
+        $booking = Booking::where('id', $id)->first();
+        if (empty($booking)) {
+            return $this->sendError(__('Booking not found'));
+        }
+
+        $booking->status = 'cancelled';
+        event(new BookingCancelEvent($booking));
+
+        //event(new SetPaidAmountEvent($booking));
+        // if($remain == 0){
+        //     $booking->status = $booking::PAID;
+        //     //$booking->sendStatusUpdatedEmails();
+        //     event(new BookingUpdatedEvent($booking));
+        // }
+
+        $booking->save();
+
+        return $this->sendSuccess([
+            'message' => __("Booking canceled successfully")
         ]);
     }
 

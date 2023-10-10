@@ -4,6 +4,7 @@ namespace Modules\Booking;
 use Illuminate\Support\Facades\Event;
 use Modules\Booking\Events\BookingCreatedEvent;
 use Modules\Booking\Events\BookingUpdatedEvent;
+use Modules\Booking\Events\BookingCancelEvent;
 use Modules\Booking\Events\SetPaidAmountEvent;
 use Modules\Booking\Listeners\BookingCreatedListen;
 use Modules\Booking\Listeners\BookingUpdateListen;
@@ -19,6 +20,7 @@ class ModuleProvider extends ModuleServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
         Event::listen(BookingCreatedEvent::class,BookingCreatedListen::class);
         Event::listen(BookingUpdatedEvent::class,BookingUpdateListen::class);
+        //Event::listen(BookingCancelEvent::class,BookingCancelListen::class);
         Event::listen(SetPaidAmountEvent::class,SetPaidAmountListen::class);
 
         $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');

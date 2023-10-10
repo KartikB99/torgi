@@ -20,7 +20,7 @@
                         <div class="label">{{__('Phone')}}</div>
                         <div class="val">{{$booking->phone}}</div>
                     </li>
-                    <li class="info-address">
+                    <!-- <li class="info-address">
                         <div class="label">{{__('Address line 1')}}</div>
                         <div class="val">{{$booking->address}}</div>
                     </li>
@@ -39,7 +39,7 @@
                     <li class="info-zip-code">
                         <div class="label">{{__('ZIP code/Postal code')}}</div>
                         <div class="val">{{$booking->zip_code}}</div>
-                    </li>
+                    </li> -->
                     <li class="info-country">
                         <div class="label">{{__('Country')}}</div>
                         <div class="val">{{get_country_name($booking->country)}}</div>

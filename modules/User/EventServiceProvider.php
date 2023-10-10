@@ -14,6 +14,7 @@ use Modules\User\Events\UserVerificationSubmit;
 use Modules\User\Listeners\ClearUserTokens;
 use Modules\User\Listeners\SendAdminUpdateVerifyDataEmail;
 use Modules\User\Listeners\SendNotifyCreatePlanRequest;
+use Modules\User\Listeners\SendNotifyCancelBookingRequest;
 use Modules\User\Listeners\SendNotifyRequestCreditPurchase;
 use Modules\User\Listeners\SendNotifyUpdateCreditPurchase;
 use Modules\User\Listeners\SendNotifyUpdatePlanRequest;
@@ -55,6 +56,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UpdatePlanRequest::class => [
             SendNotifyUpdatePlanRequest::class
+        ],
+        UpdateBookingRequest::class => [
+            SendNotifyCancelBookingRequest::class
         ]
     ];
 

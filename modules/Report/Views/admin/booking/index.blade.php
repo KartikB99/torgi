@@ -122,9 +122,11 @@
                                                 <a class="dropdown-item" href="#modal_booking_detail" data-ajax="{{route('booking.modal',['booking'=>$booking])}}" data-toggle="modal" data-id="{{$booking->id}}" data-target="#modal_booking_detail">{{__('Detail')}}</a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-paid-{{$row->id}}">{{__('Set Paid')}}</a>
                                                 <a class="dropdown-item" href="{{route('report.admin.booking.email_preview',['id'=>$row->id])}}">{{__('Email Preview')}}</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#model-cancel-booking-{{$row->id}}">{{__('Cancel Booking')}}</a>
                                             </div>
                                         </div>
                                         @include ($service->set_paid_modal_file ?? '')
+                                        @include ($service->cencel_booking_modal_file ?? '')
                                     @endif
                                 </td>
                             </tr>
@@ -176,6 +178,26 @@
                 }
             });
         });
+
+
+        $(document).on('click', '#cancel_booking_btn', function (e) {
+            var id = $(this).data('id');
+            $.ajax({
+                url:bookingCore.url+'/booking/CancelBooking',
+                data:{
+                    id: id,
+                    remain: $('#model-cancel-booking-'+id+' #set_paid_input').val(),
+                },
+                dataType:'json',
+                type:'post',
+                success:function(res){
+                    alert(res.message);
+                    window.location.reload();
+                }
+            });
+        });
+
+
         $('#modal_booking_detail').on('show.bs.modal',function (e){
             var btn = $(e.relatedTarget);
             $(this).find('.user_id').html(btn.data('id'));
