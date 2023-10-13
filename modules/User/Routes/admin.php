@@ -15,6 +15,7 @@ Route::get('/userUpgradeRequest', 'UserController@userUpgradeRequest')->name('us
 Route::get('/upgrade/{id}','UserController@userUpgradeRequestApprovedId')->name('user.admin.upgradeId');
 Route::post('/userUpgradeRequestApproved', 'UserController@userUpgradeRequestApproved')->name('user.admin.userUpgradeRequestApproved');
 
+Route::get('/download/{filename}', 'UserController@download')->name('download');
 
 Route::group(['prefix' => 'role'], function () {
     Route::get('/', 'RoleController@index')->name('user.admin.role.index');

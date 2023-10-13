@@ -72,7 +72,7 @@ class HotelController extends AdminController
             'hotel_manage_others' => $this->hasPermission('hotel_manage_others'),
             'breadcrumbs'        => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartment'),
                     'url'  => route('hotel.admin.index')
                 ],
                 [
@@ -80,7 +80,7 @@ class HotelController extends AdminController
                     'class' => 'active'
                 ],
             ],
-            'page_title'=>__("Hotel Management")
+            'page_title'=>__("Apartment Management")
         ];
         return view('Hotel::admin.index', $data);
     }
@@ -100,7 +100,7 @@ class HotelController extends AdminController
             'translation'    => new $this->hotelTranslationClass(),
             'breadcrumbs'    => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartment'),
                     'url'  => route('hotel.admin.index')
                 ],
                 [
@@ -108,7 +108,7 @@ class HotelController extends AdminController
                     'class' => 'active'
                 ],
             ],
-            'page_title'     => __("Add new Hotel")
+            'page_title'     => __("Add new Apartment")
         ];
         return view('Hotel::admin.detail', $data);
     }
@@ -136,7 +136,7 @@ class HotelController extends AdminController
             'recovery'           => 1,
             'breadcrumbs'        => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartments'),
                     'url'  => route('hotel.admin.index')
                 ],
                 [
@@ -144,7 +144,7 @@ class HotelController extends AdminController
                     'class' => 'active'
                 ],
             ],
-            'page_title'=>__("Recovery Hotel Management")
+            'page_title'=>__("Recovery Apartment Management")
         ];
         return view('Hotel::admin.index', $data);
     }
@@ -172,11 +172,11 @@ class HotelController extends AdminController
             'enable_multi_lang'=>true,
             'breadcrumbs'    => [
                 [
-                    'name' => __('Hotels'),
+                    'name' => __('Apartments'),
                     'url'  => route('hotel.admin.index')
                 ],
                 [
-                    'name'  => __('Edit Hotel'),
+                    'name'  => __('Edit Apartment'),
                     'class' => 'active'
                 ],
             ],

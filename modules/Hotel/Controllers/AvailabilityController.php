@@ -61,9 +61,10 @@ class AvailabilityController extends FrontendController{
     }
 
     public function index(Request $request,$hotel_id){
-
-        $this->checkPermission('hotel_create');
-
+        if(Auth::user()->role_id ==2){
+            $this->checkPermission('hotel_create');
+        }
+       
         if(!$this->hasHotelPermission($hotel_id))
         {
             abort(403);

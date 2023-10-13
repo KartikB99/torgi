@@ -4,6 +4,7 @@ use Modules\Core\Helpers\SitemapHelper;
 use Modules\ModuleServiceProvider;
 use Modules\Hotel\Models\Hotel;
 use Modules\User\Helpers\PermissionHelper;
+use Illuminate\Support\Facades\Auth;
 
 class ModuleProvider extends ModuleServiceProvider
 {
@@ -43,18 +44,18 @@ class ModuleProvider extends ModuleServiceProvider
             'hotel'=>[
                 "position"=>32,
                 'url'        => route('hotel.admin.index'),
-                'title'      => __('Hotel'),
+                'title'      => __('Apartment'),
                 'icon'       => 'fa fa-building-o',
                 'permission' => 'hotel_view',
                 'children'   => [
                     'add'=>[
                         'url'        => route('hotel.admin.index'),
-                        'title'      => __('All Hotels'),
+                        'title'      => __('All Apartments'),
                         'permission' => 'hotel_view',
                     ],
                     'create'=>[
                         'url'        => route('hotel.admin.create'),
-                        'title'      => __('Add new Hotel'),
+                        'title'      => __('Add new Apartment'),
                         'permission' => 'hotel_create',
                     ],
                     'attribute'=>[
@@ -103,33 +104,34 @@ class ModuleProvider extends ModuleServiceProvider
     {
         $res = [];
         if(Hotel::isEnable()){
-            $res['hotel'] = [
-                'url'   => route('hotel.vendor.index'),
-                'title'      => __("Manage Apartments"),
-                'icon'       => Hotel::getServiceIconFeatured(),
-                'position'   => 30,
-                'permission' => 'hotel_view',
-                'children' => [
-                    [
-                        'url'   => route('hotel.vendor.index'),
-                        'title'  => __("All Apartments"),
-                    ],
-                    [
-                        'url'   => route('hotel.vendor.create'),
-                        'title'      => __("Add Apartments"),
-                        'permission' => 'hotel_create',
-                    ],
-                    [
-                        'url'   => route('hotel.vendor.importview'),
-                        'title'      => __("Import Apartments"),
-                    ],
-                    [
-                        'url'   => route('hotel.vendor.recovery'),
-                        'title'      => __("Recovery"),
-                        'permission' => 'hotel_create',
-                    ],
-                ]
-            ];
+            
+                $res['hotel'] = [
+                    'url'   => route('hotel.vendor.index'),
+                    'title'      => __("Manage Apartments"),
+                    'icon'       => Hotel::getServiceIconFeatured(),
+                    'position'   => 30,
+                    'permission' => 'hotel_view',
+                    'children' => [
+                        [
+                            'url'   => route('hotel.vendor.index'),
+                            'title'  => __("All Apartments"),
+                        ],
+                        [
+                            'url'   => route('hotel.vendor.create'),
+                            'title'      => __("Add Apartments"),
+                            'permission' => 'hotel_create',
+                        ],
+                        [
+                            'url'   => route('hotel.vendor.importview'),
+                            'title'      => __("Import Apartments"),
+                        ],
+                        [
+                            'url'   => route('hotel.vendor.recovery'),
+                            'title'      => __("Recovery"),
+                            'permission' => 'hotel_create',
+                        ],
+                    ]
+                ];
         }
         return $res;
     }
